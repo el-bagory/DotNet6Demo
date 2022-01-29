@@ -1,0 +1,67 @@
+.btn-block {
+    display: inline-block;
+    width: 100%;
+}
+
+p {
+    display: inline-block;
+}
+.inline-block{
+    display: inline-block;
+}
+
+input[type="radio"] + img {
+    border-radius: 50%;
+    border: 2px solid transparent;
+    padding: 1px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+}
+button, input {
+    overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+input[type="radio" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 0px 5px;
+    padding: initial;
+    border: initial;
+}
+
+input[type="radio"]:checked + img {
+    border-radius: 50%;
+    border: 2px solid #5dca38;
+    padding: 1px;
+    vertical-align: middle;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+input[type="radio"] {
+    display: none;
+}
