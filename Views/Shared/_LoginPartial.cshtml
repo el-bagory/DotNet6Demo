@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @if(UserManager.GetUserAsync(User).Result.PhotoName != null)
+    {
+        <div class="image">
+            <img width="30" height="30" class="img-circle elevation-2" alt="profile" src="~/files/Photos/@(UserManager.GetUserAsync(User).Result.PhotoName)" />
+        </div>
+    }
+    <div class="info">
+        <a  class="d-block"href="#" title="Manage">@(UserManager.GetUserAsync(User).Result.FullName)</a>
+        @* <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @String.Join(" ",User.FistName, User.LastName)!</a> *@
+
+    </div>
+
+    
+}
+else
+{
+    <div class="nav-item">
+        <a class="nav-link text-dark" asp-action="Registration" asp-controller="Account">Register</a>
+    </div>
+    <div class="nav-item">
+        <a class="nav-link text-dark" asp-action="Login" asp-controller="Account">Login</a>
+    </div>
+}
+

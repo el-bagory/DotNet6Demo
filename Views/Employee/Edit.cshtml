@@ -1,0 +1,288 @@
+@model Demo.Models.Employee.EmployeeVM
+@{
+    ViewBag.Title = "Edit";
+}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+ 
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style=" margin-left : 0px">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Profile</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">User Profile</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="~/images/icons/Model.PhotoName"
+                       alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center" > @Model.FullName </h3>
+
+                @* <p class="text-muted text-center">Software Engineer</p> *@
+                <strong><i class="fas fa-user mr-1"></i> Username </strong>
+
+                <p class="text-muted">
+                 @Model.UserName
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+                  @{var ad = (@Model.Address != null) ? Model.Address : "Not Entered" ; }
+                <p class="text-muted">@ad</p>
+
+                <hr>
+
+                @{ var Sex_ = (Model.Sex == true) ? "Male" : "Female"; }
+                <strong><i class="fas fa-pencil-alt mr-1"></i> Gender </strong>
+
+                <p class="text-muted">
+                  @Sex_
+                </p>
+
+                <hr>
+
+                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+
+                @* <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> *@
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+           
+          </div>
+
+          
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+                <h3 class="card-title">Employee Data</h3> 
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                 
+
+                  <div class="" id="settings">
+                    <form asp-action="Edit" asp-controller="Employee" method="post" class="form-horizontal" enctype="multipart/form-data">
+                     
+                      <div class="form-group row">
+                        <label asp-for="HireDate" class="col-sm-2 col-form-label">HireDate</label>
+                        <div class="col-sm-10">
+                          <input asp-for="HireDate" type="date" class="form-control" id="inputName" placeholder="Hire Date">
+                          <span class="text-danger" asp-validation-for="HireDate"></span>
+                        </div>
+                      </div> 
+
+                      <div class="form-group row">
+                        <label asp-for="DepartmentId" class="col-sm-2 col-form-label">Department</label>
+                        <div class="col-sm-10">
+                          <select asp-for="DepartmentId" asp-items="@(SelectList)ViewBag.DepartmentList"  class="form-control custom-select">
+                            <option selected disabled>Select one</option>
+                          </select>
+                          <span class="text-danger" asp-validation-for="DepartmentId"></span>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Country</label>
+                        <div class="col-sm-10">
+                          <select id="CountryId" asp-items="@(SelectList)ViewBag.CountryList" class="form-control custom-select">
+                            <option selected disabled>Select one</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">City</label>
+                        <div class="col-sm-10">
+                          <select id="CityId" class="form-control custom-select">
+                            <option selected disabled>Select one</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label asp-for="DistrictId" class="col-sm-2 col-form-label">District</label>
+                        <div class="col-sm-10">
+                          <select asp-for="DistrictId"  class="form-control custom-select">
+                            <option selected disabled>Select one</option>
+                          </select>
+                          <span class="text-danger" asp-validation-for="DistrictId"></span>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label asp-for="Salary" class="col-sm-2 col-form-label">Salary</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" asp-for="Salary" placeholder="Salary">
+                          <span class="text-danger" asp-validation-for="Salary"></span>
+
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label asp-for="Cv" class="col-sm-2 col-form-label">Cv</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Cv" type="file" class="form-control" id="exampleInputFile">
+                            <span class="text-danger" asp-validation-for="Cv"></span>
+
+                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                      </div>
+
+                       <div class="form-group row">
+                        <label asp-for="Photo"  class="col-sm-2 col-form-label">Photo</label>
+                        
+                          <div class="col-sm-10">
+                            <input asp-for="Photo" type="file" class="custom-file-input" id="exampleInputFile">
+                              <span class="text-danger" asp-validation-for="Photo"></span>
+                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                          </div>
+                      </div>
+
+                      @* <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <div class="checkbox">
+                            <label>
+                              <input asp-for="IsActive" type="checkbox"> Is Active and agree to the <a href="#">terms and conditions</a>
+                            </label>
+                          </div>
+                        </div>
+                      </div> *@
+
+                      
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <a asp-controller="Project" asp-action="Index" class="btn btn-secondary">Cancel</a>
+                          <input type="submit" value="Save Changes" class="btn btn-success float-right">
+                        </div>
+                      </div>
+
+                      @* <div class="row">
+                         <div class="col-12">
+                          <a asp-controller="Project" asp-action="Index" class="btn btn-secondary">Cancel</a>
+                          <input type="submit" value="Create new Project" class="btn btn-success float-right">
+                       </div> *@
+                    </form>
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  
+<!-- jQuery -->
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Validation * -->
+<script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="~/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/dist/js/demo.js"></script>
+
+<script>
+
+    $(function () {
+
+        // Get City Data
+        $("#CountryId").change(function () {
+
+            $("#CityId").empty();
+            $("#CityId").append("<option>Choose City</option>");
+
+            var countryId = $("#CountryId").val(); 
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Employee/GetCityDataByCountryId",
+                data: { CntryID: countryId },
+                success: function (res) {
+
+                    $.each(res, function (i, e) {
+
+                        $("#CityId").append("<option value='" + e.Id + "'>" + e.CityName+"</option>");
+
+                    });
+                }
+            });
+        });
+
+
+        // Get District Data
+        $("#CityId").change(function () {
+
+            $("#DistrictId").empty();
+            $("#DistrictId").append("<option>Choose District</option>");
+
+            var cityId = $("#CityId").val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Employee/GetDistrictDataByCityId",
+                data: { cityId: cityId },
+                success: function (res) {
+
+                    $.each(res, function (i, e) {
+
+                        $("#DistrictId").append("<option value='" + e.Id + "'>" + e.DistrictName + "</option>");
+
+                    });
+                }
+            });
+        });
+    });
+
+
+</script>

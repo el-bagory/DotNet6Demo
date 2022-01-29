@@ -1,0 +1,116 @@
+@model IQueryable<Demo.Models.ApplicationUser.ApplicationUserVM>
+@* @model IEnumerable<CampStack.DAL.Entities.Department> *@
+
+@{
+    ViewBag.Title = "Users";
+}
+
+ 
+<h1 class = "">Users List</h1>
+ 
+<a asp-controller = "AplicationUser" asp-action = "Create" >Create Department</a> 
+
+ <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Projects</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+               <thead>
+                  <tr>
+                      <th style="width: 1%">
+                          #
+                      </th>
+                      <th style="width: 20%">
+                        Name
+                      </th>
+                      <th style="width: 10%">
+                        Avatar
+                      </th>
+                      <th>
+                        Email
+                      </th>
+                      <th style="width: 8%">
+                        Gender
+                      </th>
+                      <th style="width: 30%">
+                      </th>
+                  </tr>
+              </thead>
+
+              <tbody>
+                @{foreach (var item in Model)
+                {
+                    var Sex_ = (item.Sex == true) ? "Male" : "Female";
+
+                     <tr>
+                      <td>
+                          #
+                      </td>
+                      <td>
+                          <a>
+                              @item.FullName
+                          </a>
+                      <td>
+                          <img src="~/files/Photos/@item.PhotoName"  style="border-radius: 50%" width="30" height="30"/>
+                      </td>
+                      <td>
+                         @item.Email
+                      </td>
+                      <td>
+                              @Sex_
+                      </td>
+                      <td class="project-actions text-right">
+                         @{if(item.Salary == null){
+                            <a class="btn btn-primary btn-sm" asp-controller="Employee" asp-action="Create" asp-route-id="@item.Id">
+                              <i class="fas fa-user-plus"></i>
+                              Add to Employees
+                            </a>
+                         } else
+                         {
+                            <a style="cursor:cell " class="btn btn-info btn-sm" href="#">
+                              <i class="fas fa-user-tie"></i> 
+                              Already Employee
+                            </a>
+                         }
+                         
+                         
+                         }
+                          
+                          @* <a class="btn btn-info btn-sm" asp-controller="ApplicationUser" asp-action="Edit" asp-route-id="@item.Id">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              Edit
+                          </a> *@
+                          <a class="btn btn-danger btn-sm" asp-controller="ApplicationUser" asp-action="Delete" asp-route-id="@item.Id">
+                              <i class="fas fa-trash">
+                              </i>
+                              Delete
+                          </a>
+                      </td>
+                  </tr>
+                }}
+
+              </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+
